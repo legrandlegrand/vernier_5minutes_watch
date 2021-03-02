@@ -1,6 +1,7 @@
 # vernier_5minutes_watch
-a single hand hour watch providing accurate minutes information
+a single hand watch providing accurate minutes information
 
+#*12 hours version*
 This is a watch having:
 - a dial 
   * divided into 12 sectors of 30°
@@ -12,5 +13,23 @@ This is a watch having:
   * earch division is 2.5° large
   * each division is emptied
 
-the result provides accurate minutes informations when the main disk is rotating at 1 turn per day (30° per hour)
+When the main disk is rotating at 1 turn per day (30° per hour),
+this gives an accurate minutes informations (like a minute hand 
+turning arround the hour hand)
+
+#*24 hours version*
+This is a watch having:
+- a dial 
+  * divided into 24 sectors of 15°
+  * earch division is 1.25° large
+  * earch division is colored
+- a rotating disk
+  * containing an hour hand
+  * divided into 28.75° sectors (starting from hour hand)
+  * earch division is 1.25° large
+  * each division is emptied
+
+When the main disk is rotating at 1 turn per day (15° per hour),
+this gives an accurate minutes informations (like a minute hand 
+turning arround the hour hand)
 
