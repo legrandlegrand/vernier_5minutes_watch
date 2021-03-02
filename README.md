@@ -1,5 +1,6 @@
 # vernier_5minutes_watch
 a single hand watch providing accurate minutes information
+LICENCE CREATIVE COMMONS BY-NC-SA 2.0
 
 #*12 hours version*
 This is a watch having:
