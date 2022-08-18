@@ -1,0 +1,359 @@
+<head>
+<style>
+* {
+margin:0;
+padding:0;
+}
+</style>
+</head>
+<body>
+<canvas id="myCanvas" width="200" height="200">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+setInterval("dotime()",500)
+//setInterval("dotime()",5000) // for random testing
+
+function dotime() {
+var c=document.getElementById("myCanvas");
+var d=c.getContext("2d");
+c.height=document.body.clientHeight
+c.width=document.body.clientWidth
+
+//c.height=10000
+//c.width=10000
+
+cx=c.width/2
+cy=c.height/2
+max= c.height > c.width ? c.width : c.height
+d.fillStyle="white"
+d.fillRect(0,0,c.height,c.width)
+
+up= -0.5 * Math.PI
+pi= Math.PI
+//t=new Date(new Date()*200) // speed
+t=new Date() // realtime
+//t= new Date(Math.random()*12*3600*1000)   // for random testing
+h=((t.getHours() % 12) + t.getMinutes()/60 + t.getSeconds()/3600 + t.getMilliseconds()/3600000) / 12 * 2 * pi
+m=(t.getMinutes() + t.getSeconds()/60 + t.getMilliseconds()/60000) / 60 * 2 * pi
+
+
+
+
+//index des 30 minutes externes
+for (i=0; i<24 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=1/60*2*pi/16
+	d.arc(cx, cy, max*42/100, i/24*2*pi-w/2, i/24*2*pi + w/2)
+	d.fillStyle="black"
+	d.globalAlpha=1
+	d.fill()
+}
+
+
+//grand cercle noir exterieur
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*40.1/100,0,2 * pi)
+d.fillStyle="black"
+d.fill()
+
+//index des heures
+for (i=0; i<12 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72 //epaisseur 
+	d.arc(cx, cy, max*44/100, i/12*2*pi-w/2, i/12*2*pi + w/2)
+	d.fillStyle="black"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//grand cercle fond gris clair
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*40/100,0,2 * pi)
+d.fillStyle="white"
+d.fill()
+
+//index des 5 minutes
+for (i=0; i<12 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72 //epaisseur 
+	d.arc(cx, cy, max*40/100, i/12*2*pi-w/2, i/12*2*pi + w/2)
+	d.fillStyle="red"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//index des 15 secondes externes
+//for (i=0; i<240 ; i++) {
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=1/60*2*pi/32
+//	d.arc(cx, cy, max*41/100, i/240*2*pi-w/2, i/240*2*pi + w/2)
+//	d.fillStyle="black"
+//	d.globalAlpha=1
+//	d.fill()
+//}
+
+//grand cercle
+//d.globalAlpha=1
+//d.beginPath()
+//d.moveTo(cx,cy)
+//d.arc(cx,cy,max*40/100,0,2 * pi)
+//d.fillStyle="yellow"
+//d.fill()
+
+//index des 15 secondes interne
+//for (i=0; i<240 ; i++) {
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=1/60*2*pi/32
+//	ii=up + i*11/144/20*2*pi+h
+//	d.arc(cx, cy, max*40/100, ii-w/2, ii + w/2 )
+//	d.fillStyle="black" 
+//	d.globalAlpha=1
+//	d.fill()
+//}
+
+//grande coronne
+//d.globalAlpha=1
+//d.beginPath()
+//d.moveTo(cx,cy)
+//d.arc(cx,cy,max*39/100,0,2 * pi)
+//d.fillStyle="rgba(0,0,0,.2)"
+//d.fill()
+
+//index des minutes interne
+//for (i=0; i<60 ; i++) {
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=1/60*2*pi/16
+//	ii=up + i*11/144/5*2*pi+h
+//	d.arc(cx, cy, max*40/100, ii-w/2, ii + w/2 )
+//	d.fillStyle="black" 
+//	d.globalAlpha=1
+//	d.fill()
+//}
+
+// couronne 3 
+//d.globalAlpha=1
+//d.beginPath()
+//d.moveTo(cx,cy)
+//d.arc(cx,cy,max*38/100,0,2 * pi)
+//d.fillStyle="rgba(0,0,0,.2)"
+//d.fill()
+
+//index des 5 minutes internes
+//for (i=0; i<7 ; i++) {
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=pi/72
+//	ii=up + i*11/144*2*pi + h
+//	d.arc(cx, cy, max*40/100, ii-w/2, ii + w/2 )
+//	d.fillStyle="rgba(0,0,0,.1)"
+//	d.globalAlpha=1
+//	d.fill()
+//}
+
+//!index des 5 minutes internes
+for (i=0; i<7 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72
+	ii=up + i*11/144*2*pi + h
+	d.arc(cx, cy, max*40/100, ii + w/2, ii + 2*pi/12 - 3*w/2 )
+	d.fillStyle="white"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//index des 5 minutes internes (retrograd)
+//for (i=1; i<7 ; i++) {
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=pi/72
+//	ii=up - i*11/144*2*pi + h
+//	d.arc(cx, cy, max*40/100, ii-w/2, ii + w/2 )
+//	d.fillStyle="rgba(0,0,0,.1)"
+//	d.globalAlpha=1
+//	d.fill()
+//}
+
+//!index des 5 minutes internes (retrograd)
+for (i=1; i<8 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72
+	ii=up - i*11/144*2*pi + h
+	d.arc(cx, cy, max*40/100, ii + w/2, ii + 2*pi/12 - 3*w/2 )
+	d.fillStyle="white"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//couronne interne aiguille 5 vs grande aiguille
+//d.globalAlpha=1
+//d.beginPath()
+//d.moveTo(cx,cy)
+//d.arc(cx,cy,max*36/100,0,2 * pi)
+//d.fillStyle="white"
+//d.fill()
+
+
+
+
+
+
+//index des 10 minutes internes
+for (i=1; i<6 ; i++) {
+	if (i == 3) continue
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/36
+	ii=up + i*11/144*2*pi + h
+	d.arc(cx, cy, max*30/100, ii-w/2, ii + w/2 )
+	d.fillStyle="lightblue"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//index des 10 minutes internes (retrograd)
+for (i=1; i<6 ; i++) {
+	if (i == 3) continue
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/36
+	ii=up - i*11/144*2*pi + h
+	d.arc(cx, cy, max*30/100, ii-w/2, ii + w/2 )
+	d.fillStyle="steelblue"
+	d.globalAlpha=1
+	d.fill()
+}
+
+// demi cercles centraux
+i=0
+ii=up + i*11/144*2*pi + h
+
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*10/100,ii+w/2, ii+pi)
+d.fillStyle="white"
+d.fill()
+
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*10/100,ii+pi,ii+2 * pi-w/2)
+d.fillStyle="white"
+d.fill()
+
+// axe central
+//d.globalAlpha=1
+//d.beginPath()
+//d.moveTo(cx,cy)
+//d.arc(cx,cy,max*6/100,0,2 * pi)
+//d.fillStyle="black"
+//d.fill()
+
+// aiguille principale
+//	i=0
+//	ii=up + i*11/144*2*pi + h
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=pi/72
+//	d.arc(cx, cy, max*36/100, ii-w/2, ii + w/2 )
+//	d.fillStyle="black"
+//	d.globalAlpha=1
+//	d.fill()
+
+// aiguille principale
+	i=0
+	ii=up + i*11/144*2*pi + h
+	d.beginPath()
+	d.moveTo(cx + max*36/100 * Math.cos(ii),cy + max*36/100 * Math.sin(ii))
+	w=pi/20
+	d.arc(cx + max*47/100 * Math.cos(ii + pi),cy + max*47/100 * Math.sin(ii + pi), max*36/100, ii-w/2, ii + w/2 )
+	d.fillStyle="black"
+	d.globalAlpha=1
+	d.fill()
+	
+// chiffres heures
+for (i=1; i<13; i++) {
+	d.fillStyle="black"
+	d.textAlign = "center"
+	d.font = max/15 + "px Arial";
+	x= cx + max * 48/100 * Math.cos(up + i/12*2*pi)
+	y= cy + max * 48/100 * Math.sin(up + i/12*2*pi) + max/50
+
+	d.fillText(i,x,y)
+}
+
+// chiffres 5 minutes interne
+//for (i=1; i<7; i++) {
+//	d.save()
+//	d.fillStyle="black"
+//	d.textAlign = "left"
+//	d.font = max/40 + "px Arial Black";
+//	d.translate(cx,cy)
+//	d.rotate(i*11/144*2*pi+h)
+//	x= 0 
+//	y= -34/100*max 
+
+//	d.fillText(i*5,x,y)
+//	d.restore()
+//}
+
+// chiffres 5 minutes interne (retrograd)
+//for (i=1; i<7; i++) {
+//	d.save()
+//	d.fillStyle="black"
+//	d.textAlign = "left"
+//	d.font = max/40 + "px Arial Black";
+//	d.translate(cx,cy)
+//	d.rotate(-i*11/144*2*pi+h)
+//	x= 0 
+//	y= -34/100*max 
+//
+//	d.fillText(60-i*5,x,y)
+//	d.restore()
+//}
+
+// chiffres minutes interne
+//for (i=1; i<60; i++) {
+//	if (i % 5 == 0) continue
+//	d.save()
+//	d.fillStyle="black"
+//	d.textAlign = "center"
+//	d.font = max/90 + "px Arial Black";
+//	d.translate(cx,cy)
+//	d.rotate(i*11/144/5*2*pi+h)
+//	x= 0 
+//	y= -37/100*max 
+//
+//	d.fillText(i,x,y)
+//	d.restore()
+//}
+
+// date string (training)
+	d.save()
+	d.fillStyle="black"
+	d.textAlign = "left"
+	d.font = 25 + "px Arial Black";
+	x= 10 
+	y= 50 
+	d.fillText(t.toTimeString().split(' ')[0],x,y)
+	d.restore()
+
+}
+
+</script>
+
+</body>

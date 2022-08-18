@@ -1,0 +1,158 @@
+<head>
+<style>
+* {
+margin:0;
+padding:0;
+}
+</style>
+</head>
+<body>
+<canvas id="myCanvas" width="200" height="200">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+setInterval("dotime()",500)
+//setInterval("dotime()",5000) // for random testing
+
+function dotime() {
+var c=document.getElementById("myCanvas");
+var d=c.getContext("2d");
+c.height=document.body.clientHeight
+c.width=document.body.clientWidth
+
+//c.height=10000
+//c.width=10000
+
+cx=c.width/2
+cy=c.height/2
+max= c.height > c.width ? c.width : c.height
+d.fillStyle="white"
+d.fillRect(0,0,c.height,c.width)
+
+up= -0.5 * Math.PI
+pi= Math.PI
+//t=new Date(new Date()*200) // speed
+t=new Date() // realtime
+//t= new Date(Math.random()*12*3600*1000)   // for random testing
+h=((t.getHours() % 12) + t.getMinutes()/60 + t.getSeconds()/3600 + t.getMilliseconds()/3600000) / 12 * 2 * pi
+m=(t.getMinutes() + t.getSeconds()/60 + t.getMilliseconds()/60000) / 60 * 2 * pi
+
+min=c.height > c.width ? c.height : c.width 
+z= 100/80* Math.sqrt(1+ min/max*min/max)
+cx=cx/z
+cy=cy/z
+d.setTransform(z, 0, 0, z,1,1)
+
+
+//grand cercle fond 
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*40/100,0,2 * pi)
+d.fillStyle="white"
+d.fill()
+
+//index des 5 minutes
+for (i=0; i<12 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72 //epaisseur 
+	d.arc(cx, cy, max*40/100, i/12*2*pi-w/2, i/12*2*pi + w/2)
+	d.fillStyle="red"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//!index des 5 minutes internes
+for (i=0; i<7 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72
+	ii=up + i*11/144*2*pi + h
+	d.arc(cx, cy, max*40/100, ii + w/2, ii + 2*pi/12 - 3*w/2 )
+	d.fillStyle="white"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//!index des 5 minutes internes (retrograd)
+for (i=1; i<8 ; i++) {
+	d.beginPath()
+	d.moveTo(cx,cy)
+	w=pi/72
+	ii=up - i*11/144*2*pi + h
+	d.arc(cx, cy, max*40/100, ii + w/2, ii + 2*pi/12 - 3*w/2 )
+	d.fillStyle="white"
+	d.globalAlpha=1
+	d.fill()
+}
+
+
+// cercles centraux
+i=0
+ii=up + i*11/144*2*pi + h
+
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*7/100,ii+w/2, ii+pi)
+d.fillStyle="ghostwhite"
+d.fill()
+
+d.globalAlpha=1
+d.beginPath()
+d.moveTo(cx,cy)
+d.arc(cx,cy,max*7/100,ii+pi,ii+2 * pi-w/2)
+d.fillStyle="lightgrey"
+d.fill()
+
+//index des 10 minutes internes
+for (i=1; i<3 ; i++) {
+	d.beginPath()
+	ii=up + i*11/72*2*pi + h
+	d.moveTo(cx+max*7/100 * Math.cos(ii),cy + max*7/100 * Math.sin(ii))
+	d.arc(cx+max*7/100 * Math.cos(ii),cy + max*7/100 * Math.sin(ii), max*0.8/100, 0, 2*pi )
+	d.fillStyle="black"
+	d.globalAlpha=1
+	d.fill()
+}
+
+//index des 10 minutes internes (retrograd)
+for (i=1; i<3 ; i++) {
+	d.beginPath()
+	ii=up - i*11/72*2*pi + h
+	d.moveTo(cx+max*7/100 * Math.cos(ii),cy + max*7/100 * Math.sin(ii))
+	d.arc(cx+max*7/100 * Math.cos(ii),cy + max*7/100 * Math.sin(ii), max*0.8/100, 0, 2*pi )
+	d.fillStyle="black"
+	d.globalAlpha=1
+	d.fill()
+}
+
+// aiguille principale
+//	i=0
+//	ii=up + i*11/144*2*pi + h
+//	d.beginPath()
+//	d.moveTo(cx,cy)
+//	w=pi/72
+//	d.arc(cx, cy, max*36/100, ii-w/2, ii + w/2 )
+//	d.fillStyle="black"
+//	d.globalAlpha=1
+//	d.fill()
+
+// aiguille principale
+	i=0
+	ii=up + i*11/144*2*pi + h
+	d.beginPath()
+	d.moveTo(cx + max*36/100 * Math.cos(ii),cy + max*36/100 * Math.sin(ii))
+	w=pi/16
+	d.arc(cx + max*46/100 * Math.cos(ii + pi),cy + max*46/100 * Math.sin(ii + pi), max*36/100, ii-w/2, ii + w/2 )
+	d.fillStyle="black"
+	d.globalAlpha=1
+	d.fill()
+	
+}
+
+</script>
+
+</body>
